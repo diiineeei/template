@@ -1,7 +1,11 @@
 <template>
   
-        <v-card width="300"
-        theme="light"
+        <v-card 
+        width="300"
+        class="pa-4 mx-auto "
+        variant="outlined"
+  
+        
         >
           <v-img
             :src="props.productImg ? props.productImg : 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png'"
@@ -11,7 +15,7 @@
           <v-card-subtitle>R$ {{props.productPrice }}</v-card-subtitle>
           <v-card-text>{{ props.productDesc }}</v-card-text>
           <v-card-actions>
-            <v-btn color="primary"  
+            <v-btn block color="green-accent-4"  variant="elevated" 
             @click="addToCart"
             >Add to Cart</v-btn>
           </v-card-actions>

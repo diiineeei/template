@@ -1,15 +1,16 @@
 <script setup>
 import  ProductCard  from './ProductCard.vue'
 import CarrinhoCompras from './CarrinhoCompras.vue';
+import CadastroProduto from './CadastroProduto.vue';
 import {ref} from 'vue'
 const productsCar = ref([])
-const products = [
+const products = ref([
   {
     id: 1,
     name: 'Apple',
     price: 1.99,
     description: 'Fresh and juicy apples.',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV8sqDSPtgu8zwA9eVuN3eusKI1TDmX26sLj2W516EpjCUSncl6q0OmBfvofnJorHWu2M&usqp=CAU'
+    img: 'https://images.squarespace-cdn.com/content/v1/5b5b5824f2e6b10639fdaf09/1651599956690-0CE43F9HKEXIEK89CY0B/1.png'
   },
   {
     id: 2,
@@ -37,7 +38,7 @@ const products = [
     name: 'Eggs',
     price: 2.49,
     description: 'Farm-fresh eggs.',
-    img: 'https://swisspremiumdairy.com/wp-content/uploads/2021/11/swisspremium-wholemilk-plastic-gallon-076545001086.png'
+    img: 'https://gofflepoultry.com/wp-content/uploads/2020/05/JumboWhiteTray.png'
   },
   {
     id: 6,
@@ -79,7 +80,7 @@ const products = [
     name: 'Tomato',
     price: 0.99,
     description: 'Fresh and ripe tomatoes.',
-    img: 'https://cdn.shopify.com/s/files/1/0244/4961/3905/products/Tomatoes.png?v=1653972536'
+    img: 'https://cdn.pixabay.com/photo/2021/10/14/03/19/tomato-6707992_1280.png'
   },
   {
     id: 12,
@@ -93,7 +94,7 @@ const products = [
     name: 'Carrot',
     price: 0.59,
     description: 'Sweet and nutritious carrots.',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjTaCMsCshFoo6NFZS0IikcaMio4rG-bEfDg&usqp=CAU'
+    img: 'https://static1.squarespace.com/static/5b5b5824f2e6b10639fdaf09/5b7d6ba61ae6cfa594b1932e/5b8420facd8366d1f2daf067/1657038012687/5.png?format=1500w'
   },
   {
     id: 14,
@@ -109,10 +110,30 @@ const products = [
     description: 'Flavorful and aromatic onions.',
     img: 'https://i5.walmartimages.com/asr/ad10f097-b720-45a4-881d-8336dfde0b1b.da769cece43bb81239c46e2b360eee78.png'
   }
-];
+]);
 
 function onAddToCart(product) {
-  productsCar.value.push(product)
+ var checkProduct = productsCar.value.filter(productCar =>{
+  
+    return  product.id === productCar.id
+  })
+
+  checkProduct.length > 0 ? 
+  productsCar.value[productsCar.value.indexOf(checkProduct[0])].quantity ++:  
+  productsCar.value.push({...product, quantity:1})
+
+}
+
+function onAddProduto(produto){
+  const {name, price, description, img} = produto
+  products.value.push({
+    name: name,
+    price: Number(price),
+    description: description,
+    img: img,
+    id: Date.now()
+  })
+
 }
 
 </script>
@@ -120,12 +141,14 @@ function onAddToCart(product) {
 
 
 <template>
-<div class="main-container">
-  <h1>Products</h1>
-<v-row >
- 
-  <v-col :cols=" productsCar.length > 0 ? 8 : 12" class="produtos">
   
+<div class="main-container">
+
+
+  <h1>Products</h1>
+<v-row class="justify-center">
+  
+  <v-col :cols="productsCar.length > 0 ? 8 : 12" class="produtos">
   <ProductCard
     v-for="product in products"
     :key="product.id"
@@ -135,10 +158,14 @@ function onAddToCart(product) {
     :productImg="product.img"
     @add-to-cart="onAddToCart(product)"/>
   </v-col>
-  <v-col cols="4" v-if="productsCar.length > 0">
+  <v-col cols="md-4 xs-8" v-if="productsCar.length > 0" class="px-5">
     <CarrinhoCompras :produtos="productsCar"/>
   </v-col>
+  <v-col cols="12">
+  <CadastroProduto @create-produto="onAddProduto"/>
+ </v-col>
 </v-row>
+
 </div>
 </template>
 
@@ -162,5 +189,7 @@ h1{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  grid-row-gap:15px;
+  max-width: 80vw;
 }
 </style>

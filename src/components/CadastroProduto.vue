@@ -32,6 +32,9 @@ const dadosProduto = ref({
     img: ''
 })
 
+import { produtosAppStore } from '@/store/app'
+const store = produtosAppStore()
+
 const formValido = ref(true)
 
 const form = ref(null)
@@ -48,14 +51,18 @@ const validacaoPreco = ref([
 
 
 function onCriarProduto(){
-    const {name, price, description} = dadosProduto.value
-    if(name && price && description){
-    emit('create-produto', dadosProduto.value)
+    const {name, price, description, img} = dadosProduto.value
+    store.products.push({
+        name: name,
+        price: Number(price),
+        description: description,
+        img: img,
+        id: Date.now()
+    })
+
     onLimpar()
-    }
    
 }
-
 function onLimpar(){
     form.value.reset()
 }

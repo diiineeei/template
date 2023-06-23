@@ -7,10 +7,13 @@
   
         
         >
-          <v-img
+          <v-img v-if="props.productImg"
             :src="props.productImg ? props.productImg : 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png'"
             height="200px"
           />
+          <v-container v-else class="activity-indicator-container d-flex justify-center align-center" height="200px" fluid>
+          <v-progress-circular   indeterminate></v-progress-circular>
+          </v-container>
           <v-card-title>{{ props.productName }}</v-card-title>
           <v-card-subtitle>R$ {{props.productPrice }}</v-card-subtitle>
           <v-card-text>{{ props.productDesc }}</v-card-text>
@@ -20,7 +23,7 @@
             >Add to Cart</v-btn>
           </v-card-actions>
         </v-card>
-    
+      
     </template>
     
     <script setup>
@@ -44,7 +47,9 @@
     </script>
     
     <style>
-  
+  .activity-indicator-container{
+    height: 200px;
+  }
 
 
     </style>

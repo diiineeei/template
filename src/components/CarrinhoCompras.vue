@@ -14,7 +14,7 @@
                     <v-list-item v-for="produto in store.productsCar" :key="produto.name" color="primary" rounded="sm"
                         class="my-5">
                         <v-container class="item-main-container pa-0">
-                            <div class="mr-5">
+                            <div class="mr-5 w-md-25" >
                             <v-list-item-title>{{ produto.name }}</v-list-item-title>
                             <v-list-item-subtitle>{{ productPrice(produto) }}</v-list-item-subtitle>
                             </div>

@@ -1,44 +1,3 @@
-<script setup>
-import  ProductCard  from './ProductCard.vue'
-import CarrinhoCompras from './CarrinhoCompras.vue';
-import CadastroProduto from './CadastroProduto.vue';
-import {ref} from 'vue'
-import { produtosAppStore } from '@/store/app'
-const store = produtosAppStore()
-
-const productsCar = ref([])
-const products = ref([
-  
-]);
-
-function onAddToCart(product) {
- var checkProduct = store.productsCar.filter(productCar =>{
-  
-    return  product.id === productCar.id
-  })
-
-  checkProduct.length > 0 ? 
-  store.productsCar[store.productsCar.indexOf(checkProduct[0])].quantity ++:  
-  store.productsCar.push({...product, quantity:1})
-
-}
-
-function onAddProduto(produto){
-  const {name, price, description, img} = produto
-  products.value.push({
-    name: name,
-    price: Number(price),
-    description: description,
-    img: img,
-    id: Date.now()
-  })
-
-}
-
-</script>
-
-
-
 <template>
   
 <div class="main-container">
@@ -58,10 +17,10 @@ function onAddProduto(produto){
     @add-to-cart="onAddToCart(product)"/>
   </v-col>
   <v-col cols="md-4 xs-8" v-if="store.productsCar.length > 0" class="px-5">
-    <CarrinhoCompras :produtos="productsCar"/>
+    <CarrinhoCompras />
   </v-col>
   <v-col cols="12">
-  <CadastroProduto @create-produto="onAddProduto"/>
+  <CadastroProduto/>
  </v-col>
 </v-row>
 
@@ -69,6 +28,35 @@ function onAddProduto(produto){
 </template>
 
 
+<script setup>
+import  ProductCard  from './ProductCard.vue'
+import CarrinhoCompras from './CarrinhoCompras.vue';
+import CadastroProduto from './CadastroProduto.vue';
+import {/* ref, */} from 'vue'
+import { produtosAppStore } from '@/store/app'
+const store = produtosAppStore()
+function onAddToCart(product) {
+ var checkProduct = store.productsCar.filter(productCar =>{
+  
+    return  product.id === productCar.id
+  })
+
+  checkProduct.length > 0 ? 
+  store.productsCar[store.productsCar.indexOf(checkProduct[0])].quantity ++:  
+  store.productsCar.push({...product, quantity:1})
+
+}
+
+
+setTimeout(()=>{
+  let chickenProductIndex;
+  store.products.filter((product,index)=>{
+    if(product.name == "Chicken") chickenProductIndex = index
+  })
+  store.products[chickenProductIndex].img = "https://seara.com.br/wp-content/uploads/2022/10/7894904797905_Frango_inteiro_congelado_Seara_PRINCIPAL_520x440.png"
+},5000)
+
+</script>
 
 <style>
 h1{

@@ -17,13 +17,14 @@
         </v-col>
         {{ dadosProduto.value }}
     </v-row>
+    
     </v-container>
 </template>
 
 <script setup>
-import {ref, defineEmits} from 'vue'
+import {ref, /* defineEmits */} from 'vue'
 
-const emit = defineEmits(['create-produto'])
+/* const emit = defineEmits(['create-produto']) */
 
 const dadosProduto = ref({
     name: '',
@@ -35,7 +36,7 @@ const dadosProduto = ref({
 import { produtosAppStore } from '@/store/app'
 const store = produtosAppStore()
 
-const formValido = ref(true)
+const formValido = ref(false)
 
 const form = ref(null)
 

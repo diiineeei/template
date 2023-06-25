@@ -11,21 +11,18 @@
     </v-col>
     <v-col cols="12" md="4" sm="6" class="bg-green-accent-2 h-100">
       <v-container class="h-100 form-wrapper">
-        <v-container class="h-25 justify-center align-center d-flex">
-          <h1 class="text-center ">
-            <v-icon class="logo-icon" icon="mdi-vuejs"></v-icon>
-            eGrocery
-          </h1>
+        <v-container class="h-25 justify-center align-start d-flex">
+          <img src="@/assets/logo-simples-h.png" :width="300"/>
         </v-container>
         <v-container class="pa-0 my-5">
-          <p class="text-h5 font-weight-medium">Bem Vindo ao Vue eGrocery Store</p>
+          <p class="text-h5 font-weight-medium">Welcome to Vue online Grocery Store</p>
           <p class="text-subtitle-1">
-            Acesse sua conta continuar com suas compras!
+            Sign in to your account and carry on with your shopping!
           </p>
         </v-container>
         <v-form @submit.prevent="doLogin" ref="form">
           <v-text-field
-            label="Nome de usuário"
+            label="User name"
             variant="outlined"
             v-model="user.name"
             :rules="validateName"
@@ -33,7 +30,7 @@
           <v-text-field
             :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
-            label="Senha"
+            label="Password"
             variant="outlined"
             @click:append-inner="visible = !visible"
             v-model="user.password"
@@ -42,7 +39,7 @@
           <div class="d-flex align-center justify-space-between">
           <v-checkbox 
           color="black"
-          label="Relembrar"
+          label="Remember"
           hide-details="auto"
           ></v-checkbox>
             <a
@@ -54,7 +51,7 @@
               Forgot login password?</a
             >
           </div>
-          <v-btn color="black"  block type="submit" >Entrar</v-btn>
+          <v-btn color="black"  block type="submit" >LOGIN</v-btn>
         </v-form>
       </v-container>
     </v-col>

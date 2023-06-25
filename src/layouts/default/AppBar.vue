@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar color="green-accent-2" >
-    <v-app-bar-title>
-      <span class="title">Vue Grocery Store</span>
+  <v-app-bar color="green-accent-2">
+    <v-app-bar-title >
+      <img src="@/assets/logo-h.png" :width="150"/>
     </v-app-bar-title>
     <v-tabs class="d-none d-sm-flex">
       <v-tab v-for="page in pages" :key="page.title" :to="page.path">
@@ -38,7 +38,7 @@ const pages = [
 },
 {
   title:"Products",
-  path:"/",
+  path:"/produtos",
 },
 {
   title:"Cart",

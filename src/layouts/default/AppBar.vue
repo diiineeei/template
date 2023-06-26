@@ -30,6 +30,12 @@
 </template>
 
 <script setup>
+import { produtosAppStore } from "@/store/app";
+
+const userStore = produtosAppStore().user
+
+
+
 import {ref} from 'vue'
 const pages = [
   {
@@ -40,12 +46,23 @@ const pages = [
   title:"Products",
   path:"/produtos",
 },
+userStore.name.toLowerCase() == 'admin' ?
+{
+  title:"Cadastro",
+  path:"/Cadastro",
+}:
 {
   title:"Cart",
   path:"/carrinho",
 },
+!userStore.name ? 
 {
   title:"Login",
+  path:"/login",
+}
+:
+{
+  title:userStore.name,
   path:"/login",
 },
 

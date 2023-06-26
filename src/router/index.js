@@ -26,6 +26,11 @@ const routes = [
         name: 'Produtos',
         component: () => import('@/views/ProdutosScreen.vue'),
       },
+      {
+        path: '/cadastro',
+        name: 'Cadastro',
+        component: () => import('@/views/CadastroScreen.vue'),
+      },
     ],
   },
 ]

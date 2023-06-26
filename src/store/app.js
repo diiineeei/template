@@ -111,5 +111,10 @@ export const produtosAppStore = defineStore('products', () => {
   ])
   const productsCar = ref([])
 
-  return { products, productsCar }
+  const user = ref({
+    name: '',
+    compras: []
+  })
+
+  return { products, productsCar, user }
 })

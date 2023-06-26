@@ -35,6 +35,7 @@
             @click:append-inner="visible = !visible"
             v-model="user.password"
             :rules="validatePassword"
+            class="mt-2"
           ></v-text-field>
           <div class="d-flex align-center justify-space-between">
           <v-checkbox 
@@ -60,6 +61,15 @@
 
 <script setup>
 import { ref } from "vue";
+import { produtosAppStore } from "@/store/app";
+import router from '@/router'
+
+
+
+const userStore = produtosAppStore().user
+
+
+
 const visible = ref(false);
 
 const user = ref({
@@ -83,7 +93,8 @@ const validatePassword = ref([
 const doLogin = (()=>{
     const {name, password} = user.value
     if(name && password){
-        alert("Login")
+        userStore.name = name
+        router.push({path: '/produtos'})
     }
 })
 </script>

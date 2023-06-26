@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <v-container class="w-md-75">
     <v-row class="flex-column ">
         <v-col cols="12">
             <h1> Cadastro de produtos</h1>
@@ -7,12 +7,12 @@
  
         <v-col>
             <v-form @submit.prevent="onCriarProduto" v-model="formValido" ref="form">
-                <v-text-field label="Nome-Produto" v-model="dadosProduto.name" :rules="validacaoNome"/>
-                <v-text-field label="Preço" type="number" v-model="dadosProduto.price" :rules="validacaoPreco"/>
-                <v-text-field label="Descrição" v-model="dadosProduto.description"/>
-                <v-text-field label="Foto URL" v-model="dadosProduto.img"/>
-                <v-btn color="primary" type="submit"  :disabled="!formValido"> Cadastrar</v-btn>
-                <v-btn @click="onLimpar">Clear</v-btn>
+                <v-text-field variant="outlined" label="Nome-Produto" v-model="dadosProduto.name" :rules="validacaoNome"/>
+                <v-text-field variant="outlined" label="Preço" type="number" v-model="dadosProduto.price" :rules="validacaoPreco"/>
+                <v-text-field variant="outlined" label="Descrição" v-model="dadosProduto.description"/>
+                <v-text-field variant="outlined" label="Foto URL" v-model="dadosProduto.img"/>
+                <v-btn color="green-accent-2" type="submit"  :disabled="!formValido" class="mr-10"> Cadastrar</v-btn>
+                <v-btn @click="onLimpar" color="error">Clear</v-btn>
             </v-form>
         </v-col>
         {{ dadosProduto.value }}

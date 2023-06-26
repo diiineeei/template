@@ -20,7 +20,6 @@
     <CarrinhoCompras />
   </v-col>
   <v-col cols="12">
-  <CadastroProduto/>
  </v-col>
 </v-row>
 
@@ -31,7 +30,6 @@
 <script setup>
 import  ProductCard  from './ProductCard.vue'
 import CarrinhoCompras from './CarrinhoCompras.vue';
-import CadastroProduto from './CadastroProduto.vue';
 import {/* ref, */} from 'vue'
 import { produtosAppStore } from '@/store/app'
 const store = produtosAppStore()

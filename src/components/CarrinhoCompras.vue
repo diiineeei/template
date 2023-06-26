@@ -9,7 +9,7 @@
                         <v-badge color="success" :content="store.productsCar.length">
                             <v-icon icon="mdi-cart" size="small"></v-icon>
                         </v-badge>
-                        CARRINHO DE COMPRAS
+                        SHOPPING CART
                     </h2>
                     <v-list-item v-for="produto in store.productsCar" :key="produto.name" color="primary" rounded="sm"
                         class="my-5">

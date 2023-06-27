@@ -1,41 +1,31 @@
 <template>
-  <v-row class="max-height ma-0 justify-center align-center bg-green-accent-2 align-content-center">
+  <v-row class="max-height ma-0 justify-center align-content-center align-center bg-green-accent-2">
     <v-col cols="12" sm="5" class="pa-0 d-flex flex-column align-center">
       <p
       id="title"
-        class="text-h2 text-md-h1 text-bold text-center font-weight-medium my-5"
-      >
-         Grocery<br/>
-        Store
-      </p>
-      <p class="text-subtitle-1 w-75 text-justify font-weight-medium text-grey-darken-4 d-none d-md-flex mb-10">
-        Vue Grocery: Your Convenient Online Food Shopping Destination! Discover
-        the ultimate online grocery store experience with Vue Grocery. Shop from
-        the comfort of your home and explore a wide range of fresh produce,
-        pantry staples, gourmet delights, and everyday essentials.
-      </p>
+      class="text-left font-weight-medium">Grocery<br/> Store
       <v-btn
         id="btn-1"
         size="large"
-        variant="outlined"
         color="black"
-        class="rounded-pill px-7 w-75 d-none d-sm-flex"
+        class="d-none d-sm-flex mt-10 text-green-accent-2"
+        block
         to="/produtos"
+      >SHOP NOW</v-btn
       >
-        SHOP NOW</v-btn
-      >
+      </p>
+
     </v-col>
     <v-col cols="12" sm="5" class="pa-0 align-center d-flex flex-column">
-      <v-img src="@/assets/hero-img.png" class="hero-img mb-10"></v-img>
+      <v-img src="@/assets/hero-img.png" class="hero-img my-5 w-75"></v-img>
       <v-btn
         id="btn-1"
         size="large"
         variant="outlined"
         color="black"
-        class="rounded-pill px-7  w-75 d-flex d-sm-none"
+        class="px-7  w-75 d-flex d-sm-none "
         to="/produtos"
-      >
-        SHOP NOW</v-btn
+      >SHOP NOW</v-btn
       >
     </v-col>
   </v-row>
@@ -54,18 +44,22 @@
 }
 
 #btn-1 {
-  transition: ease 0.5s;
+  transition: .3s;
+  
 }
 
 #btn-1:hover {
-  background: black;
-  color: #69f0ae !important;
+  box-shadow: 8px 10px #133021;
+  transform: scale(1.05);
+  font-size: 18px;
 }
+
 
 #title{
     font-size: 135px !important;
-    line-height: 135px;
+    line-height: 125px;
 }
+
 
 @media (max-width:960px) {
     #title{

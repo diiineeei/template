@@ -1,5 +1,5 @@
 <template>
-    <v-container class="w-md-75">
+    <v-container>
     <v-row class="flex-column ">
         <v-col cols="12">
             <h1> Cadastro de produtos</h1>

@@ -29,7 +29,7 @@
 
 <script setup>
 import  ProductCard  from './ProductCard.vue'
-import CarrinhoCompras from './CarrinhoCompras.vue';
+import CarrinhoCompras from './CarrinhoSideBar.vue';
 import {/* ref, */} from 'vue'
 import { produtosAppStore } from '@/store/app'
 const store = produtosAppStore()

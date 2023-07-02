@@ -81,10 +81,11 @@ const productPrice = ((produto) => {
  */
 
  const changeItemQuantity = ((produto, type)=>{
-    if(type === "remove" && store.productsCar[store.productsCar.indexOf(produto)].quantity == 1) {
+    store.productsCar[store.productsCar.indexOf(produto)].quantity += type == "add" ? 1 : -1
+    if(type === "remove" && store.productsCar[store.productsCar.indexOf(produto)].quantity == 0) {
         removeItem(produto)
     }
-    store.productsCar[store.productsCar.indexOf(produto)].quantity += type == "add" ? 1 : -1
+
  })
 
  const removeItem = ((produto)=>{

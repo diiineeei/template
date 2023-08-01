@@ -1,57 +1,54 @@
-# base
+<h1 align="center"> Vue Grocery Store 🛒🛍️ </h1>
 
-## Project setup
+![Vue Grocery Store](home-img.png)
 
-```
-# yarn
-yarn
+## Introduction
 
-# npm
-npm install
+Vue Grocery Store is an eGrocery store website built using Vue 3.0, Vuetify, and Pinia. This project aims to provide a simple and user-friendly web application for online grocery shopping. The website offers a wide range of grocery products and allows customers to easily browse, add items to their cart, and complete the purchase.
 
-# pnpm
-pnpm install
-```
+## Features
 
-### Compiles and hot-reloads for development
+- User-friendly interface for easy navigation and shopping
+- Add products to the cart and manage the cart contents
+- Checkout process with order summary
+- Responsive design for seamless experience on various devices
 
-```
-# yarn
-yarn dev
+## Demo
+[Link to live demo](link_to_live_demo) (⚠ not working for now)
 
-# npm
-npm run dev
+## Getting Started
 
-# pnpm
-pnpm dev
-```
+To get started with the Vue Grocery Store locally on your machine, follow the instructions below.
 
-### Compiles and minifies for production
+## 📌 How to Use 
 
-```
-# yarn
-yarn build
+```bash
+# Clone this repository
+$ git clone https://github.com/Eliezir/Vue-Grocery-Store
 
-# npm
-npm run build
+# Go into the repository
+$ cd Vue-grocery-store
 
-# pnpm
-pnpm build
+# Install dependencies
+$ npm install
+
+# Run the development server
+$ npm run serve
 ```
 
-### Lints and fixes files
+After executing these commands, the Vue Grocery Store application will be up and running. You can access it by opening your web browser and navigating to `http://localhost:8080` (or the port displayed in the terminal).
 
-```
-# yarn
-yarn lint
 
-# npm
-npm run lint
+## Technologies Used
 
-# pnpm
-pnpm lint
-```
 
-### Customize configuration
+The Vue Grocery Store project utilizes the following technologies:
 
-See [Configuration Reference](https://vitejs.dev/config/).
+- [Vue.js 3.0](https://vuejs.org) : A progressive JavaScript framework for building user interfaces.
+- [Vuetify](https://vuetifyjs.com/en/) : A Material Design component framework for Vue.js to create elegant and responsive UI components.
+- [Pinia](https://pinia.vuejs.org) : A state management library for Vue.js applications.
+
+
+
+
+<sub>Made with 💜 by <a href="https://github.com/Eliezir">Eliezir Neto</a> </sub>

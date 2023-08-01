@@ -14,17 +14,19 @@
                     <v-list-item v-for="produto in store.productsCar" :key="produto.name" color="primary" rounded="sm"
                         class="my-5">
                         <v-container class="item-main-container pa-0">
-                            <div class="mr-5 w-md-25" >
+                            <div class="mr-5 w-50" >
                             <v-list-item-title>{{ produto.name }}</v-list-item-title>
                             <v-list-item-subtitle>{{ productPrice(produto) }}</v-list-item-subtitle>
                             </div>
-                            <v-btn variant="text" icon="mdi-plus-circle" color="green-accent-4" 
-                            @click="changeItemQuantity(produto,'add')"
-                            ></v-btn>
-                            {{ produto.quantity }}
+                          <div class="d-flex align-center">
                             <v-btn variant="text" icon="mdi-minus-circle" color="red-accent-2" 
                             @click="changeItemQuantity(produto,'remove')"
                             ></v-btn>
+                            {{ produto.quantity }}
+                            <v-btn variant="text" icon="mdi-plus-circle" color="green-accent-4" 
+                            @click="changeItemQuantity(produto,'add')"
+                            ></v-btn>
+                          </div>
                         </v-container>
                         <template v-slot:prepend>
                             <v-avatar size="85" rounded="0">
@@ -34,9 +36,9 @@
                         <template v-slot:append>
                             <v-hover v-slot="{ isHovering, props }">
                                 <v-btn v-bind="props" :icon="isHovering ? 'mdi-delete-empty' : 'mdi-delete'" variant="text"
-                                    elevation="0" color="red-darken-4" 
+                                    elevation="0" color="red-darken-1" 
                                     @click="removeItem(produto)"
-                                    />
+                                    class="d-none d-sm-flex"/>
                             </v-hover>
                         </template>
                     </v-list-item>

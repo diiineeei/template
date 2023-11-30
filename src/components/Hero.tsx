@@ -107,27 +107,21 @@ function PlayIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 // ]
 interface Person {
     id: string;
-    name: string;
-    title: string;
-    role: string;
-    email: string;
-    telephone: string;
+    nome: string;
+    descricao: string;
+    em_estoque: boolean;
     imageUrl: string;
+    valor: number;
 }
 
 async function fetchData() {
     const apiUrl = String(process.env.NEXT_PUBLIC_API_ENDPOINT);
-
     try {
         const response = await axios.get(apiUrl);
         const peopleData: Person[] = response.data;
-
-        // Renderiza ou executa outras ações com os dados
-        console.log(peopleData);
-
-        return peopleData; // Opcional: Retorna os dados, se necessário
+        // console.log(peopleData);
+        return peopleData;
     } catch (error) {
-        // Lida com erros
         console.error('Error fetching data:', error);
         return []
     }
@@ -141,47 +135,24 @@ export async function Hero() {
             <Container>
                 <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {peopleData.map((person) => (
-                        <li
-                            key={person.email}
-                            className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
-                        >
+                        <li  key={person.id} className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
                             <div className="flex flex-1 flex-col p-8">
-                                <img className="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src={person.imageUrl}
-                                     alt=""/>
-                                <h3 className="mt-6 text-sm font-medium text-gray-900">{person.name}</h3>
+                                <h3 className="mt-6 text-sm font-medium text-gray-900">{person.nome}</h3>
+                                <img className="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src={person.imageUrl} alt=""/>
                                 <dl className="mt-1 flex flex-grow flex-col justify-between">
                                     <dt className="sr-only">Title</dt>
-                                    <dd className="text-sm text-gray-500">{person.title}</dd>
+                                    <dd className="text-sm text-gray-500">{person.descricao}</dd>
                                     <dt className="sr-only">Role</dt>
                                     <dd className="mt-3">
-                <span
-                    className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                  {person.role}
-                </span>
+                                        <span
+                                            className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ${
+                                                person.em_estoque ? 'bg-green-50 text-green-700 ring-green-600/20': 'bg-red-50 text-red-700 ring-red-600/20'
+                                            }`}
+                                        >
+                                          {person.em_estoque ? 'R$ ' + person.valor : 'Fora de Estoque'}
+                                        </span>
                                     </dd>
                                 </dl>
-                            </div>
-                            <div>
-                                <div className="-mt-px flex divide-x divide-gray-200">
-                                    <div className="flex w-0 flex-1">
-                                        <a
-                                            href={`mailto:${person.email}`}
-                                            className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                                        >
-                                            {/*<EnvelopeIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />*/}
-                                            Preço R$10000
-                                        </a>
-                                    </div>
-                                    <div className="-ml-px flex w-0 flex-1">
-                                        <a
-                                            href={`tel:${person.telephone}`}
-                                            className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                                        >
-                                            {/*<PhoneIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />*/}
-                                            Em Estoque
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </li>
                     ))}

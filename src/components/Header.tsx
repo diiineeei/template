@@ -131,7 +131,7 @@ export function Header() {
               Log in
             </Button>
             <Button href="#" className="hidden lg:block">
-              Download
+              Sing In
             </Button>
           </div>
         </Container>

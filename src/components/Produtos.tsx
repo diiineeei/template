@@ -127,7 +127,7 @@ async function fetchData() {
     }
 }
 
-export async function Hero() {
+export async function Produtos() {
 
     const peopleData: Person[] = await fetchData();
     return (

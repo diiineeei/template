@@ -14,7 +14,7 @@ Vue Grocery Store is an eGrocery store website built using Vue 3.0, Vuetify, and
 - Responsive design for seamless experience on various devices
 
 ## Demo
-[Link to live demo](link_to_live_demo) (⚠ not working for now)
+[Link to live demo](https://vue-grocery-store.vercel.app/carrinho)
 
 ## Getting Started
 

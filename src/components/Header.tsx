@@ -104,13 +104,13 @@ export function Header() {
                         >
                           <div className="space-y-4">
                             <MobileNavLink href="/#features">
-                              Features
+                              Cervejas
                             </MobileNavLink>
                             <MobileNavLink href="/#reviews">
-                              Reviews
+                              Whiskey
                             </MobileNavLink>
                             <MobileNavLink href="/#pricing">
-                              Pricing
+                              Energeticos
                             </MobileNavLink>
                             <MobileNavLink href="/#faqs">FAQs</MobileNavLink>
                           </div>
@@ -131,7 +131,7 @@ export function Header() {
               Log in
             </Button>
             <Button href="#" className="hidden lg:block">
-              Download
+              Sing In
             </Button>
           </div>
         </Container>

@@ -34,8 +34,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.idea/*
-.idea/
+.env
 
 static_production
 static_production/*
+
+.idea
+.idea/*

@@ -85,41 +85,21 @@ function PlayIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-// const people = [
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-//     },    {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-//     },
-//     // More people...
-// ]
 interface Person {
     id: string;
     nome: string;
     descricao: string;
-    em_estoque: boolean;
-    imageUrl: string;
+    emEstoque: boolean;
+    imagemURL: string;
     valor: number;
 }
 
 async function fetchData() {
-    const apiUrl = String(process.env.NEXT_PUBLIC_API_ENDPOINT);
+    const apiUrl = String(process.env.NEXT_PUBLIC_API_ENDPOINT+"/api/lista/produtos");
     try {
         const response = await axios.get(apiUrl);
         const peopleData: Person[] = response.data;
-        // console.log(peopleData);
+        console.log(peopleData);
         return peopleData;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -138,7 +118,7 @@ export async function Produtos() {
                         <li  key={person.id} className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
                             <div className="flex flex-1 flex-col p-8">
                                 <h3 className="mt-6 text-sm font-medium text-gray-900">{person.nome}</h3>
-                                <img className="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src={person.imageUrl} alt=""/>
+                                <img className="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src={person.imagemURL} alt=""/>
                                 <dl className="mt-1 flex flex-grow flex-col justify-between">
                                     <dt className="sr-only">Title</dt>
                                     <dd className="text-sm text-gray-500">{person.descricao}</dd>
@@ -146,10 +126,10 @@ export async function Produtos() {
                                     <dd className="mt-3">
                                         <span
                                             className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset ${
-                                                person.em_estoque ? 'bg-green-50 text-green-700 ring-green-600/20': 'bg-red-50 text-red-700 ring-red-600/20'
+                                                person.emEstoque ? 'bg-green-50 text-green-700 ring-green-600/20': 'bg-red-50 text-red-700 ring-red-600/20'
                                             }`}
                                         >
-                                          {person.em_estoque ? 'R$ ' + person.valor : 'Fora de Estoque'}
+                                          {person.emEstoque ? 'R$ ' + person.valor : 'Fora de Estoque'}
                                         </span>
                                     </dd>
                                 </dl>

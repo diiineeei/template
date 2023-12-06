@@ -6,7 +6,8 @@ import { Produtos } from '@/components/Produtos'
 // import { Reviews } from '@/components/Reviews'
 // import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import {BarraDePesquisa} from "@/components/BarraDePesquisa";
-
+import { createSignal, onCleanup, onMount } from 'solid-js';
+import type { Component } from 'solid-js';
 export default function Home() {
   return (
     <>

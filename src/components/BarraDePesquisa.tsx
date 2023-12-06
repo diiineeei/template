@@ -14,7 +14,7 @@ export function BarraDePesquisa() {
                 required
                 className="w-60 min-w-0 shrink"
             />
-            <Button type="submit" color="cyan" className="ml-4 flex-none">
+            <Button href="/login" color="cyan" className="ml-4 flex-none">
               <span className="hidden lg:inline">Encontrar Produto</span>
               <span className="lg:hidden">Encontrar Produto</span>
             </Button>

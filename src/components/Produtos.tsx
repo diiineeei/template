@@ -94,24 +94,31 @@ interface Person {
     valor: number;
 }
 
-async function fetchData() {
-    const apiUrl = String(process.env.NEXT_PUBLIC_API_ENDPOINT+"/api/lista/produtos");
-    try {
-        const response = await axios.get(apiUrl);
-        const peopleData: Person[] = response.data;
-        console.log(peopleData);
-        return peopleData;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return []
-    }
-}
+// async function fetchData() {
+//     const apiUrl = String(process.env.NEXT_PUBLIC_API_ENDPOINT+"/api/lista/produtos");
+//     try {
+//         const response = await axios.get(apiUrl);
+//         const peopleData: Person[] = response.data;
+//         console.log(peopleData);
+//         return peopleData;
+//     } catch (error) {
+//         console.error('Error fetching data:', error);
+//         return []
+//     }
+// }
 
 export async function Produtos() {
 
-    const peopleData: Person[] = await fetchData();
+    // const peopleData: Person[] = await fetchData();
+    const peopleData: Person[] = [
+        {id:"2",nome:"Cerveja Imperio",descricao:"Elegância em cada gole. Cerveja Império oferece um sabor refinado para momentos especiais.","valor":2.5,"emEstoque":true,"imagemURL":"https://storage.googleapis.com/produtos-lojinha/Bebidas/Imperio.png"},
+        {id:"1",nome:"Cerveja Budweiser",descricao:"American classic. Budweiser, a cerveja que traz o autêntico sabor dos EUA em cada garrafa.","valor":3,"emEstoque":true,"imagemURL":"https://storage.googleapis.com/produtos-lojinha/Bebidas/budweiser.png"},
+        {id:"3",nome:"Cerveja Heineken",descricao:"A autêntica experiência cervejeira. Heineken, a escolha premium para quem busca qualidade inigualável.","valor":7,"emEstoque":false,"imagemURL":"https://storage.googleapis.com/produtos-lojinha/Bebidas/heineken.png"},
+        {id:"4",nome:"Cerveja Imperio",descricao:"Elegância em cada gole. Cerveja Império oferece um sabor refinado para momentos especiais.","valor":2.5,"emEstoque":true,"imagemURL":"https://storage.googleapis.com/produtos-lojinha/Bebidas/Imperio.png"},
+        {id:"5",nome:"Cerveja Budweiser",descricao:"American classic. Budweiser, a cerveja que traz o autêntico sabor dos EUA em cada garrafa.","valor":3,"emEstoque":true,"imagemURL":"https://storage.googleapis.com/produtos-lojinha/Bebidas/budweiser.png"},
+        {id:"6",nome:"Cerveja Heineken",descricao:"A autêntica experiência cervejeira. Heineken, a escolha premium para quem busca qualidade inigualável.","valor":7,"emEstoque":false,"imagemURL":"https://storage.googleapis.com/produtos-lojinha/Bebidas/heineken.png"}]
     return (
-        <div className="overflow-hidden py-20 sm:py-32 lg:pb-32 xl:pb-36">
+        <div className="overflow-hidden py-20 sm:py-py-20 lg:pb-py-20 xl:pb-py-20">
             <Container>
                 <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {peopleData.map((person) => (

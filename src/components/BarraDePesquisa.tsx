@@ -8,7 +8,7 @@ export function BarraDePesquisa() {
         <div className="flex-col items-center md:flex-row-reverse md:justify-between md:pt-6">
           <form className="flex w-full justify-center md:w-auto">
             <TextField
-                type="email"
+                type="text"
                 aria-label="Cerveja ...."
                 placeholder="Cerveja ...."
                 required

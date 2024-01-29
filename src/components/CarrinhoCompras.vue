@@ -3,10 +3,10 @@
     <v-row class="d-flex justify-space-between">
         <v-col id="timeline-container" cols="12" class="d-none d-md-flex">
             <v-timeline direction="horizontal" line-inset="40"  truncate-line="both">
-                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 0 ? 'green-accent-3':'grey-lighten-1'" fill-dot icon="mdi-cart"></v-timeline-item>
-                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 1 ? 'green-accent-3':'grey-lighten-1'" fill-dot icon="mdi-account"></v-timeline-item>
-                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 2 ? 'green-accent-3':'grey-lighten-1'" fill-dot icon="mdi-credit-card-outline"></v-timeline-item>
-                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 3 ? 'green-accent-3':'grey-lighten-1'" fill-dot icon="mdi-check-circle"></v-timeline-item>
+                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 0 ? 'blue-accent-3':'grey-lighten-1'" fill-dot icon="mdi-cart"></v-timeline-item>
+                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 1 ? 'blue-accent-3':'grey-lighten-1'" fill-dot icon="mdi-account"></v-timeline-item>
+                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 2 ? 'blue-accent-3':'grey-lighten-1'" fill-dot icon="mdi-credit-card-outline"></v-timeline-item>
+                <v-timeline-item dot-color="grey-lighten-5" size="x-large" :icon-color="timeline == 3 ? 'blue-accent-3':'grey-lighten-1'" fill-dot icon="mdi-check-circle"></v-timeline-item>
             </v-timeline>
         </v-col>
 
@@ -21,16 +21,16 @@
                     </p>
                     <v-btn @click="clearCart()" prepend-icon="mdi-delete" variant="outlined" color="red">REMOVER TODOS</v-btn>
                 </v-col>
-    
+
                 <v-divider/>
 
                 <v-col>
                 <v-list class="bg-white" max-height="450px" id="products-list">
-         
+
                 <ProdutosCarrinhosMainVue
-                v-for="produto in store.productsCar" 
+                v-for="produto in store.productsCar"
                 :produto="produto"
-                :key="produto.name"
+                :key="produto.nome"
                 @changeItemQuantity="(type)=>changeItemQuantity(produto, type)"
                 />
                 </v-list>
@@ -59,7 +59,7 @@ const timeline = ref(0)
     else{
         store.productsCar[store.productsCar.indexOf(produto)].quantity += type == "add" ? 1 : -1
     }
- 
+
  })
 
     const clearCart = (()=>{
@@ -76,12 +76,12 @@ const timeline = ref(0)
   width: 10px;
 }
 #products-list::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
 #products-list::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0; 
+  background: #a0a0a0;
 }
-#products-list::-webkit-scrollbar-thumb{ 
+#products-list::-webkit-scrollbar-thumb{
   border-radius: 100px;
   background: #cecece;
 }

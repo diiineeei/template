@@ -1,5 +1,5 @@
 <template>
-  <v-row class="max-height ma-0 justify-center align-content-center align-center bg-green-accent-2">
+  <v-row class="max-height ma-0 justify-center align-content-center align-center bg-blue-accent-2">
     <v-col cols="12" sm="5" class="pa-0 d-flex flex-column align-center">
       <p
       id="title"
@@ -8,7 +8,7 @@
         id="btn-1"
         size="large"
         color="black"
-        class="d-none d-sm-flex mt-10 text-green-accent-2"
+        class="d-none d-sm-flex mt-10 text-blue-accent-2"
         block
         to="/produtos"
       >SHOP NOW</v-btn
@@ -45,7 +45,7 @@
 
 #btn-1 {
   transition: .3s;
-  
+
 }
 
 #btn-1:hover {

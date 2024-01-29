@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="green-accent-2">
+  <v-app-bar color="blue-accent-2">
     <v-app-bar-title >
       <img src="@/assets/logo-h.png" :width="150"/>
     </v-app-bar-title>
@@ -16,10 +16,10 @@
         v-model="drawer"
         location="top"
         temporary
-        class="bg-green-accent-2"
+        class="light-blue-accent-2"
       >
       <v-list variant="elevated" >
-         <v-list-item v-for="page in pages" :key="page.title" :to="page.path" class="bg-green-accent-2" elevation="0">
+         <v-list-item v-for="page in pages" :key="page.title" :to="page.path" class="light-blue-accent-2" elevation="0">
           <v-list-item-title class="font-weight-bold text-uppercase">
             {{ page.title }}</v-list-item-title>
         </v-list-item>
@@ -55,7 +55,7 @@ userStore.name.toLowerCase() == 'admin' ?
   title:"Cart",
   path:"/carrinho",
 },
-!userStore.name ? 
+!userStore.name ?
 {
   title:"Login",
   path:"/login",

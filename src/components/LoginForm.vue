@@ -9,7 +9,7 @@
     >
       <v-img src="@/assets/LoginImg.svg" class="w-75 h-75"></v-img>
     </v-col>
-    <v-col cols="12" md="4" sm="6" class="bg-green-accent-2 h-100">
+    <v-col cols="12" md="4" sm="6" class="bg-blue-accent-2 h-100">
       <v-container class="h-100 form-wrapper">
         <v-container class="h-25 justify-center align-start d-flex">
           <img src="@/assets/logo-simples-h.png" :width="300"/>
@@ -38,13 +38,13 @@
             class="mt-2"
           ></v-text-field>
           <div class="d-flex align-center justify-space-between">
-          <v-checkbox 
+          <v-checkbox
           color="black"
           label="Remember"
           hide-details="auto"
           ></v-checkbox>
             <a
-              class="text-caption text-decoration-none text-green-darken-4 font-weight-bold"
+              class="text-caption text-decoration-none text-blue-darken-4 font-weight-bold"
               href="#"
               rel="noopener noreferrer"
               target="_blank"

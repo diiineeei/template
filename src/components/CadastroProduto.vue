@@ -4,20 +4,20 @@
         <v-col cols="12">
             <h1> Cadastro de produtos</h1>
         </v-col>
- 
+
         <v-col>
             <v-form @submit.prevent="onCriarProduto" v-model="formValido" ref="form">
-                <v-text-field variant="outlined" label="Nome-Produto" v-model="dadosProduto.name" :rules="validacaoNome"/>
-                <v-text-field variant="outlined" label="Preço" type="number" v-model="dadosProduto.price" :rules="validacaoPreco"/>
-                <v-text-field variant="outlined" label="Descrição" v-model="dadosProduto.description"/>
-                <v-text-field variant="outlined" label="Foto URL" v-model="dadosProduto.img"/>
-                <v-btn color="green-accent-2" type="submit"  :disabled="!formValido" class="mr-10"> Cadastrar</v-btn>
+                <v-text-field variant="outlined" label="Nome-Produto" v-model="dadosProduto.nome" :rules="validacaoNome"/>
+                <v-text-field variant="outlined" label="Preço" type="number" v-model="dadosProduto.valor" :rules="validacaoPreco"/>
+                <v-text-field variant="outlined" label="Descrição" v-model="dadosProduto.descricao"/>
+                <v-text-field variant="outlined" label="Foto URL" v-model="dadosProduto.imagemURL"/>
+                <v-btn color="blue-accent-2" type="submit"  :disabled="!formValido" class="mr-10"> Cadastrar</v-btn>
                 <v-btn @click="onLimpar" color="error">Clear</v-btn>
             </v-form>
         </v-col>
         {{ dadosProduto.value }}
     </v-row>
-    
+
     </v-container>
 </template>
 
@@ -27,10 +27,10 @@ import {ref, /* defineEmits */} from 'vue'
 /* const emit = defineEmits(['create-produto']) */
 
 const dadosProduto = ref({
-    name: '',
-    price: '',
-    description: '',
-    img: ''
+    nome: '',
+    valor: '',
+    descricao: '',
+    imagemURL: ''
 })
 
 import { produtosAppStore } from '@/store/app'
@@ -41,28 +41,28 @@ const formValido = ref(false)
 const form = ref(null)
 
 const validacaoNome = ref([
-    (name) => !!name || 'O nome do produto é obrigatório',
-    (name) => name.length >= 5 || 'O nome do produto deve ter pelo menos 5 caracteres'
+    (nome) => !!nome || 'O nome do produto é obrigatório',
+    (nome) => nome.length >= 5 || 'O nome do produto deve ter pelo menos 5 caracteres'
 ])
 
 const validacaoPreco = ref([
-    (price) => !!price || 'O Preço do produto é obrigatório',
-    (price) => Number(price) > 0 || 'Insira um preço valido'
+    (valor) => !!valor || 'O Preço do produto é obrigatório',
+    (valor) => Number(valor) > 0 || 'Insira um preço valido'
 ])
 
 
 function onCriarProduto(){
-    const {name, price, description, img} = dadosProduto.value
+    const {nome, valor, descricao, imagemURL} = dadosProduto.value
     store.products.push({
-        name: name,
-        price: Number(price),
-        description: description,
-        img: img,
+        nome: nome,
+        valor: Number(valor),
+        descricao: descricao,
+        imagemURL: imagemURL,
         id: Date.now()
     })
 
     onLimpar()
-   
+
 }
 function onLimpar(){
     form.value.reset()

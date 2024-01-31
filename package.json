@@ -1,38 +1,30 @@
 {
-  "name": "rodinei-Lojinha",
-  "version": "0.1.0",
+  "name": "primeiro-projeto",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "export": "next export"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix --ignore-path .gitignore"
   },
-  "browserslist": "defaults, not ie <= 11",
   "dependencies": {
-    "@headlessui/react": "^1.7.15",
-    "@headlessui/tailwindcss": "^0.2.0",
-    "@tailwindcss/forms": "^0.5.3",
-    "@types/node": "20.4.5",
-    "@types/react": "18.2.18",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "^10.4.12",
-    "axios": "^1.6.2",
-    "clsx": "^1.2.1",
-    "framer-motion": "^10.15.0",
-    "next": "13.4.16",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "^3.3.3",
-    "typescript": "5.1.6",
-    "use-debounce": "^9.0.4"
+    "@mdi/font": "7.0.96",
+    "axios": "^1.6.7",
+    "core-js": "^3.29.0",
+    "pinia": "^2.1.4",
+    "roboto-fontface": "*",
+    "vue": "^3.2.0",
+    "vue-router": "^4.0.0",
+    "vuetify": "^3.0.0",
+    "webfontloader": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "8.45.0",
-    "eslint-config-next": "13.4.16",
-    "prettier": "^3.0.1",
-    "prettier-plugin-tailwindcss": "^0.5.2",
-    "sharp": "^0.32.0"
+    "@vitejs/plugin-vue": "^3.0.3",
+    "eslint": "^8.37.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "sass": "^1.60.0",
+    "vite": "^4.2.0",
+    "vite-plugin-vuetify": "^1.0.0"
   }
 }

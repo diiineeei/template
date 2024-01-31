@@ -1,35 +1,54 @@
-# Pocket
+<h1 align="center"> Adega do Vilão Store 🛒🛍️ </h1>
 
-Pocket is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+![Adega do Vilão Store](home-img.png)
 
-## Getting started
+## Introduction
 
-To get started with this template, first install the npm dependencies:
+Adega do Vilão Store is an eGrocery store website built using Vue 3.0, Vuetify, and Pinia. This project aims to provide a simple and user-friendly web application for online grocery shopping. The website offers a wide range of grocery products and allows customers to easily browse, add items to their cart, and complete the purchase.
+
+## Features
+
+- User-friendly interface for easy navigation and shopping
+- Add products to the cart and manage the cart contents
+- Checkout process with order summary
+- Responsive design for seamless experience on various devices
+
+## Demo
+[Link to live demo](https://vue-grocery-store.vercel.app/carrinho)
+
+## Getting Started
+
+To get started with the Adega do Vilão Store locally on your machine, follow the instructions below.
+
+## 📌 How to Use 
 
 ```bash
-npm install
+# Clone this repository
+$ git clone https://github.com/Eliezir/Vue-Grocery-Store
+
+# Go into the repository
+$ cd Vue-grocery-store
+
+# Install dependencies
+$ npm install
+
+# Run the development server
+$ npm run serve
 ```
 
-Next, run the development server:
+After executing these commands, the Adega do Vilão Store application will be up and running. You can access it by opening your web browser and navigating to `http://localhost:8080` (or the port displayed in the terminal).
 
-```bash
-npm run dev
-```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+## Technologies Used
 
-## Customizing
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+The Adega do Vilão Store project utilizes the following technologies:
 
-## License
+- [Vue.js 3.0](https://vuejs.org) : A progressive JavaScript framework for building user interfaces.
+- [Vuetify](https://vuetifyjs.com/en/) : A Material Design component framework for Vue.js to create elegant and responsive UI components.
+- [Pinia](https://pinia.vuejs.org) : A state management library for Vue.js applications.
 
-This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
 
-## Learn more
 
-To learn more about the technologies used in this site template, see the following resources:
 
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
+<sub>Made with 💜 by <a href="https://github.com/Eliezir">Eliezir Neto</a> </sub>

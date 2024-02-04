@@ -19,7 +19,7 @@
           <v-card-actions>
             <v-btn block color="blue-accent-3"  variant="elevated"
             @click="addToCart"
-            >Add to Cart</v-btn>
+            >Adicionar</v-btn>
           </v-card-actions>
         </v-card>
       </v-hover>
@@ -34,15 +34,12 @@
       emit("add-to-cart", card)
     }
 
-
-        const card = defineProps({
-            "productnome": String,
-            "productvalor": Number,
-            "productDesc": String,
-            "productimagemURL": String,
-
-
-        })
+      const card = defineProps({
+          "productnome": String,
+          "productvalor": Number,
+          "productDesc": String,
+          "productimagemURL": String,
+      })
     </script>
 
     <style>

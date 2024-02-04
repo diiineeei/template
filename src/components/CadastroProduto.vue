@@ -30,7 +30,8 @@ const dadosProduto = ref({
     nome: '',
     valor: '',
     descricao: '',
-    imagemURL: ''
+    imagemURL: '',
+    ID:''
 })
 
 import { produtosAppStore } from '@/store/app'
@@ -58,7 +59,7 @@ function onCriarProduto(){
         valor: Number(valor),
         descricao: descricao,
         imagemURL: imagemURL,
-        id: Date.now()
+        // ID: Date.now()
     })
 
     onLimpar()

@@ -9,7 +9,7 @@
                         <v-badge color="success" :content="store.productsCar.length">
                             <v-icon icon="mdi-cart" size="small"></v-icon>
                         </v-badge>
-                        SHOPPING CART
+                        CARRINHO
                     </h2>
                     <v-list-item v-for="produto in store.productsCar" :key="produto.nome" color="primary" rounded="sm"
                         class="my-5">
@@ -45,9 +45,14 @@
                     <v-row>
                     <v-col class="d-flex justify-space-around">
                     <h2 class="text-center">Total: {{ precoTotal }}</h2>
-                    <v-btn append-icon="mdi-shopping-outline" color="blue-accent-3" >Order Now</v-btn>
                     </v-col>
                     </v-row>
+                  <v-row>
+                    <v-col class="d-flex justify-space-around">
+                      <v-btn append-icon="mdi-shopping-outline" color="blue-accent-3" to="/carrinho">Finalizar</v-btn>
+                      <!--                      <v-btn variant="text" append-icon="mdi-shopping-outline" color="blue-accent-3" to="/carrinho">Finalizar</v-btn>-->
+                    </v-col>
+                  </v-row>
                 </v-list>
             </v-col>
         </v-row>

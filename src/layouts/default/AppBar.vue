@@ -38,21 +38,21 @@ const userStore = produtosAppStore().user
 
 import {ref} from 'vue'
 const pages = [
-  {
-    title: "home",
-    path:"/",
-},
+  // {
+  //   title: "home",
+  //   path:"/",
+  // },
 {
   title:"Products",
   path:"/produtos",
 },
-userStore.name.toLowerCase() == 'admin' ?
+// userStore.name.toLowerCase() == 'admin' ?
 {
   title:"Cadastro",
   path:"/Cadastro",
-}:
+},
 {
-  title:"Cart",
+  title:"Carrinho",
   path:"/carrinho",
 },
 !userStore.name ?

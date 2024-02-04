@@ -3,7 +3,7 @@
     <v-col cols="12" sm="5" class="pa-0 d-flex flex-column align-center">
       <p
       id="title"
-      class="text-left font-weight-medium">Grocery<br/> Store
+      class="text-left font-weight-medium">Adega do<br/> Vilão
       <v-btn
         id="btn-1"
         size="large"
@@ -25,7 +25,7 @@
         color="black"
         class="px-7  w-75 d-flex d-sm-none "
         to="/produtos"
-      >SHOP NOW</v-btn
+      >Produtos</v-btn
       >
     </v-col>
   </v-row>

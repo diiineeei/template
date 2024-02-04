@@ -55,16 +55,16 @@ const pages = [
   title:"Carrinho",
   path:"/carrinho",
 },
-!userStore.name ?
+// !userStore.name ?
 {
   title:"Login",
   path:"/login",
 }
-:
-{
-  title:userStore.name,
-  path:"/login",
-},
+// :
+// {
+//   title:userStore.name,
+//   path:"/login",
+// },
 
 ]
 const drawer = ref(false)

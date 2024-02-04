@@ -6,11 +6,13 @@
             <h1> Cadastro de produtos</h1>
         </v-col>
 
-        <v-col>
+        <v-col cols="12" class="d-flex justify-center align-center">
           <v-img
-            height="200px"
-            v-if="imagemSelecionada"
-            :src="imagemPreview"
+            :width="300"
+            aspect-ratio="16/9"
+            cover
+            :src="imagemPreview || 'https://cdn.vuetifyjs.com/images/parallax/material.jpg'"
+            multiple
           ></v-img>
         </v-col>
 
@@ -18,7 +20,6 @@
             <v-form @submit.prevent="onCriarProduto" v-model="formValido" ref="form">
               <v-file-input
                 label="Selecionar imagem"
-                v-model="dadosProduto.image"
                 accept="image/*"
                 @change="onUploadImagem"
               ></v-file-input>
@@ -29,7 +30,6 @@
                 <v-btn @click="onLimpar" color="error">Clear</v-btn>
             </v-form>
         </v-col>
-        {{ dadosProduto.value }}
     </v-sheet>
 
     </v-container>
@@ -45,7 +45,7 @@ const dadosProduto = ref({
     nome: '',
     valor: '',
     descricao: '',
-    imagem: ''
+    imagem: []
 })
 
 import { produtosAppStore } from '@/store/app'
@@ -55,8 +55,7 @@ const formValido = ref(false)
 
 const form = ref(null)
 
-var imagemPreview;
-var imagemSelecionada;
+const imagemPreview = ref('');
 
 
 const validacaoNome = ref([
@@ -72,11 +71,11 @@ const validacaoPreco = ref([
 
 function onCriarProduto(){
 
-  const {nome, valor, descricao, image} = dadosProduto.value
+  const {nome, valor, descricao, imagem} = dadosProduto.value
 
 
   const formData = new FormData();
-  formData.append('imagem', image);
+  formData.append('imagem', imagem);
   formData.append('nome', nome);
   formData.append('valor', Number(valor));
   formData.append('descricao', descricao);
@@ -108,17 +107,25 @@ function onCriarProduto(){
 }
 function onLimpar(){
     form.value.reset()
+    imagemPreview.value = 'https://cdn.vuetifyjs.com/images/parallax/material.jpg'; // Ou '' para limpar completamente
 }
 
 function onUploadImagem(e) {
   const file = e.target.files[0];
+  dadosProduto.value.imagem = file; // Garante que o arquivo selecionado seja atribuído corretamente
+
   const reader = new FileReader();
 
   reader.onload = (e) => {
-    imagemPreview = e.target.result;
+    imagemPreview.value = e.target.result; // Atualiza a variável de preview com a imagem selecionada
   };
 
-  reader.readAsDataURL(file);
+  if (file) {
+    reader.readAsDataURL(file);
+  }
 }
 
 </script>
+
+
+

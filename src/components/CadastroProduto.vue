@@ -25,6 +25,7 @@
               ></v-file-input>
               <v-text-field variant="outlined" label="Nome-Produto" v-model="dadosProduto.nome" :rules="validacaoNome"/>
               <v-text-field variant="outlined" label="Descrição" v-model="dadosProduto.descricao"/>
+              <v-text-field variant="outlined" label="Codigo de barras" type="number" nv-model="dadosProduto.codigoDeBarras"/>
               <v-text-field variant="outlined" label="Preço" type="number" v-model="dadosProduto.valor" :rules="validacaoPreco"/>
                 <v-btn color="blue-accent-2" type="submit"  :disabled="!formValido" class="mr-10"> Cadastrar</v-btn>
                 <v-btn @click="onLimpar" color="error">Clear</v-btn>
@@ -45,6 +46,7 @@ const dadosProduto = ref({
     nome: '',
     valor: '',
     descricao: '',
+    codigoDeBarras: '',
     imagem: []
 })
 
@@ -71,7 +73,7 @@ const validacaoPreco = ref([
 
 function onCriarProduto(){
 
-  const {nome, valor, descricao, imagem} = dadosProduto.value
+  const {nome, valor, descricao, imagem, codigoDeBarras} = dadosProduto.value
 
 
   const formData = new FormData();
@@ -79,8 +81,10 @@ function onCriarProduto(){
   formData.append('nome', nome);
   formData.append('valor', Number(valor));
   formData.append('descricao', descricao);
+  formData.append('codigoDeBarras', codigoDeBarras);
 
-  axios.post('http://localhost:8080/api/upload', formData, {
+  axios.post('https://app-lojinha-vielkaxmma-uc.a.run.app/api/upload', formData, {
+  // axios.post('http://localhost:8080/api/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

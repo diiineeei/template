@@ -49,7 +49,7 @@ const pages = [
 // userStore.name.toLowerCase() == 'admin' ?
 {
   title:"Cadastro",
-  path:"/Cadastro",
+  path:"/cadastro",
 },
 {
   title:"Carrinho",

@@ -7,9 +7,6 @@
             <p class="text-grey-darken-3 font-weight-black text-body-1">{{ fullvalor }}</p>
        </div>
        <v-divider class="border-opacity-25"></v-divider>
-       <div class="d-flex justify-space-between w-100 text-subtitle-2 font-weight-light text-grey-darken-3">Valor do frete:
-            <p class="text-grey-darken-3 font-weight-black text-body-1">R$ 0,00</p>
-       </div>
         <div class="bg-grey-lighten-5 pa-5 w-100">
             <div class="d-flex justify-space-between w-100 text-subtitle-2 font-weight-light text-grey-darken-3 mb-2">Total à prazo:
                 <p class="text-grey-darken-3 font-weight-black text-body-1">{{fullvalor }}</p>
@@ -45,7 +42,8 @@ const fullvalor = computed(() => {
 })
 
 const discountvalor = computed(() => {
-    const value = store.productsCar.reduce((total, produtoAtual) => total + produtoAtual.valor * produtoAtual.quantity, 0) * 0.9;
+    // const value = store.productsCar.reduce((total, produtoAtual) => total + produtoAtual.valor * produtoAtual.quantity, 0) * 0.9;
+    const value = store.productsCar.reduce((total, produtoAtual) => total + produtoAtual.valor * produtoAtual.quantity, 0);
     return value.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'

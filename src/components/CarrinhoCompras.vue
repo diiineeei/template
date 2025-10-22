@@ -25,12 +25,12 @@
                 <v-divider/>
 
                 <v-col>
-                <v-list class="bg-white" max-height="450px" id="products-list">
+                <v-list class="bg-white" id="products-list">
 
                 <ProdutosCarrinhosMainVue
                 v-for="produto in store.productsCar"
                 :produto="produto"
-                :key="produto.nome"
+                :key="getProductId(produto)"
                 @changeItemQuantity="(type)=>changeItemQuantity(produto, type)"
                 />
                 </v-list>
@@ -52,14 +52,42 @@ import ProdutosResumo from './ComponentesCarrinhos/ProdutosResumo.vue';
 const store = produtosAppStore()
 const timeline = ref(0)
 
- const changeItemQuantity = ((produto, type)=>{
-    if(type === "remove" && store.productsCar[store.productsCar.indexOf(produto)].quantity == 1 || type === "delete") {
-        store.productsCar.splice( store.productsCar.indexOf(produto), 1)
+const getProductId = (item) => {
+    if (!item) return ''
+    if (item.cartId) return item.cartId
+    if (item.ID !== undefined && item.ID !== null) return item.ID
+    if (item.id !== undefined && item.id !== null) return item.id
+    if (item.nome) {
+        return `${item.nome}-${item.valor ?? ''}`
     }
-    else{
-        store.productsCar[store.productsCar.indexOf(produto)].quantity += type == "add" ? 1 : -1
+    return JSON.stringify(item)
+}
+
+ const changeItemQuantity = ((produto, type)=>{
+    const index = store.productsCar.findIndex(
+        (productCar) => getProductId(productCar) === getProductId(produto)
+    )
+    if (index === -1) {
+        return
     }
 
+    if (type === "delete") {
+        store.productsCar.splice(index, 1)
+        return
+    }
+
+    if (type === "add") {
+        store.productsCar[index].quantity += 1
+        return
+    }
+
+    if (type === "remove") {
+        if (store.productsCar[index].quantity <= 1) {
+            store.productsCar.splice(index, 1)
+        } else {
+            store.productsCar[index].quantity -= 1
+        }
+    }
  })
 
     const clearCart = (()=>{
@@ -71,6 +99,11 @@ const timeline = ref(0)
 
 
 <style scoped>
+
+#products-list{
+  max-height: calc(100vh - var(--app-header-height, 72px) - 280px);
+  overflow-y: auto;
+}
 
 #products-list::-webkit-scrollbar {
   width: 10px;

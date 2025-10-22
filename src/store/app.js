@@ -14,8 +14,8 @@ export const produtosAppStore = defineStore('products', () => {
   // Função para carregar produtos da API
   async function loadProducts() {
     try {
-      // const response = await axios.get('http://localhost:8080/api/lista/produtos');
-      const response = await axios.get('https://app-lojinha-vielkaxmma-uc.a.run.app/api/lista/produtos');
+      const response = await axios.get('http://localhost:8080/api/lista/produtos');
+      // const response = await axios.get('https://app-lojinha-vielkaxmma-uc.a.run.app/api/lista/produtos');
       products.value = response.data;
     } catch (error) {
       console.error('Erro ao carregar produtos:', error);

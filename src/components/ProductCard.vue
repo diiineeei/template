@@ -1,8 +1,7 @@
 <template>
 <v-hover v-slot:="{ isHovering, props }">
         <v-card
-        width="300"
-        class="pa-4 mx-auto rounded-lg"
+        class="product-card pa-4 rounded-lg"
         :elevation="isHovering ? 15 : 5"
         close-delay        v-bind="props"
         >
@@ -47,5 +46,8 @@
     height: 200px;
   }
 
-
+  .product-card{
+    width: 100%;
+    margin: 0 auto;
+  }
     </style>

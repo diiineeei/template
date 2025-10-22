@@ -83,8 +83,8 @@ function onCriarProduto(){
   formData.append('descricao', descricao);
   formData.append('codigoDeBarras', codigoDeBarras);
 
-  axios.post('https://app-lojinha-vielkaxmma-uc.a.run.app/api/upload', formData, {
-  // axios.post('http://localhost:8080/api/upload', formData, {
+  // axios.post('https://app-lojinha-vielkaxmma-uc.a.run.app/api/upload', formData, {
+  axios.post('http://localhost:8080/api/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

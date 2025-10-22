@@ -1,5 +1,10 @@
 <template>
-  <v-app-bar color="blue-accent-2">
+  <v-app-bar
+    color="blue-accent-2"
+    elevation="8"
+    height="96"
+    class="app-bar"
+  >
     <v-app-bar-title >
       <img src="@/assets/logo-h.png" :width="150"/>
     </v-app-bar-title>
@@ -71,4 +76,17 @@ const drawer = ref(false)
 
 </script>
 
+<style scoped>
+.app-bar {
+  z-index: 30;
+  width: 100%;
+  backdrop-filter: blur(8px);
+  font-size: 1.05rem;
+}
 
+.app-bar :deep(.v-toolbar__content){
+  height: 96px !important;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+</style>

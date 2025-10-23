@@ -12,22 +12,22 @@ const routes = [
         component: () => import('@/views/ProdutosScreen.vue'),
       },
       {
-        path: '/produtos',
+        path: 'produtos',
         name: 'Produtos2',
         component: () => import('@/views/ProdutosScreen.vue'),
       },
       {
-        path: '/home',
+        path: 'home',
         name: 'Home',
         component: () => import('@/views/HomeScreen.vue'),
       },
       {
-        path: '/carrinho',
+        path: 'carrinho',
         name: 'Carrinho',
         component: () => import('@/views/CarrinhoCompras.vue'),
       },
       {
-        path: '/login',
+        path: 'login',
         name: 'Login',
         component: () => import('@/views/LoginScreen.vue'),
       },
@@ -37,7 +37,7 @@ const routes = [
       //   component: () => import('@/views/ProdutosScreen.vue'),
       // },
       {
-        path: '/cadastro',
+        path: 'cadastro',
         name: 'Cadastro',
         component: () => import('@/views/CadastroScreen.vue'),
       },
@@ -46,7 +46,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 })
 

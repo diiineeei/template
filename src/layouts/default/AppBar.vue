@@ -9,7 +9,7 @@
       <img src="@/assets/logo-h.png" :width="150"/>
     </v-app-bar-title>
     <v-tabs class="d-none d-sm-flex">
-      <v-tab v-for="page in pages" :key="page.title" :to="page.path">
+      <v-tab v-for="page in pages" :key="page.title" :to="page.to">
       {{ page.title}}
       </v-tab>
     </v-tabs>
@@ -24,7 +24,7 @@
         class="light-blue-accent-2"
       >
       <v-list variant="elevated" >
-         <v-list-item v-for="page in pages" :key="page.title" :to="page.path" class="light-blue-accent-2" elevation="0">
+         <v-list-item v-for="page in pages" :key="page.title" :to="page.to" class="light-blue-accent-2" elevation="0">
           <v-list-item-title class="font-weight-bold text-uppercase">
             {{ page.title }}</v-list-item-title>
         </v-list-item>
@@ -49,21 +49,21 @@ const pages = [
   // },
 {
   title:"Products",
-  path:"/produtos",
+  to:{ name: 'Produtos2' },
 },
 // userStore.name.toLowerCase() == 'admin' ?
 {
   title:"Cadastro",
-  path:"/cadastro",
+  to:{ name: 'Cadastro' },
 },
 {
   title:"Carrinho",
-  path:"/carrinho",
+  to:{ name: 'Carrinho' },
 },
 // !userStore.name ?
 {
   title:"Login",
-  path:"/login",
+  to:{ name: 'Login' },
 }
 // :
 // {

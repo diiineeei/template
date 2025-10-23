@@ -5,10 +5,45 @@
 
 <h1 class="page-title">Produtos</h1>
 
+<!-- Scanner toolbar -->
+<div class="scanner-toolbar">
+  <div class="scanner-left">
+    <v-switch
+      color="blue-accent-2"
+      hide-details
+      inset
+      v-model="habilitarLeitor"
+      :label="`Leitor de código de barras: ${habilitarLeitor ? 'Ativo' : 'Inativo'}`"
+    />
+  </div>
+  <div class="scanner-search">
+    <v-text-field
+      v-model="filtroNome"
+      variant="outlined"
+      density="comfortable"
+      hide-details
+      clearable
+      label="Buscar por nome"
+      prepend-inner-icon="mdi-magnify"
+      class="scanner-search-input"
+    />
+  </div>
+  <div class="scanner-right" v-if="ultimoCodigo">
+    <span class="scanner-last">Último código: <strong>{{ ultimoCodigo }}</strong></span>
+  </div>
+  <div class="scanner-right" v-else>
+    <span class="scanner-last">Aproxime o leitor e bip o produto</span>
+  </div>
+  <v-snackbar v-model="snackbar" timeout="2200" :color="snackbarColor" location="top right">
+    {{ snackbarText }}
+  </v-snackbar>
+  
+</div>
+
 <div class="content">
   <section class="products-grid">
     <ProductCard
-      v-for="product in store.products"
+      v-for="product in filteredProducts"
       :key="product.ID"
       :productnome="product.nome"
       :productvalor="product.valor"
@@ -32,10 +67,122 @@
 <script setup>
 import  ProductCard  from './ProductCard.vue'
 import CarrinhoCompras from './CarrinhoSideBar.vue';
-import { computed } from 'vue'
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { produtosAppStore } from '@/store/app'
 const store = produtosAppStore()
 const shouldFixCart = computed(() => store.productsCar.length > 0)
+
+// Barcode scanner handling
+const habilitarLeitor = ref(true)
+const ultimoCodigo = ref('')
+const snackbar = ref(false)
+const snackbarText = ref('')
+const snackbarColor = ref('success')
+
+// Search filter by name
+const filtroNome = ref('')
+const filteredProducts = computed(() => {
+  const term = (filtroNome.value || '').trim().toLowerCase()
+  if (!term) return store.products
+  return store.products.filter((p) =>
+    (p?.nome ?? '').toLowerCase().includes(term) ||
+    (p?.descricao ?? '').toLowerCase().includes(term)
+  )
+})
+
+let buffer = ''
+let lastKeyTs = 0
+const INTERVALO_MAXIMO_MS = 100 // janela de tempo entre teclas do leitor
+
+function notificar(msg, color = 'success'){
+  snackbarText.value = msg
+  snackbarColor.value = color
+  snackbar.value = true
+}
+
+// Beep sound when adding products
+let audioCtx
+function playBeep(type = 'success'){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)()
+    const o = audioCtx.createOscillator()
+    const g = audioCtx.createGain()
+    const now = audioCtx.currentTime
+    const duration = 0.12
+    const freq = type === 'error' ? 240 : 880
+    o.type = 'sine'
+    o.frequency.setValueAtTime(freq, now)
+    g.gain.setValueAtTime(0.0001, now)
+    g.gain.exponentialRampToValueAtTime(0.3, now + 0.01)
+    g.gain.exponentialRampToValueAtTime(0.0001, now + duration)
+    o.connect(g)
+    g.connect(audioCtx.destination)
+    o.start(now)
+    o.stop(now + duration)
+  }catch(e){
+    // falha silenciosa se o contexto de áudio não estiver disponível
+  }
+}
+
+function getBarcodeFromProduct(p){
+  if(!p || typeof p !== 'object') return ''
+  // Prioridade de chaves comuns
+  const candidates = ['codigoDeBarras','codigo_de_barras','barcode','ean','ean13','upc','code','cod','sku']
+  for(const key of candidates){
+    if(p[key] != null && p[key] !== '') return String(p[key])
+  }
+  return ''
+}
+
+function processarCodigo(codigo){
+  const code = String(codigo || '').trim()
+  if(!code) return
+  ultimoCodigo.value = code
+
+  const produto = store.products.find(p => String(getBarcodeFromProduct(p)) === code)
+  if(!produto){
+    notificar('Produto não encontrado para o código: ' + code, 'error')
+    playBeep('error')
+    return
+  }
+  onAddToCart(produto)
+  notificar(`Adicionado ao carrinho: ${produto.nome}`,'success')
+  playBeep('success')
+}
+
+function onKeydownGlobal(e){
+  if(!habilitarLeitor.value) return
+  // Evitar capturar quando usuário está digitando em inputs normais
+  const tag = (document.activeElement?.tagName || '').toUpperCase()
+  if(tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable) return
+
+  const now = Date.now()
+  if(now - lastKeyTs > INTERVALO_MAXIMO_MS){
+    buffer = ''
+  }
+  lastKeyTs = now
+
+  if(e.key === 'Enter'){
+    e.preventDefault()
+    const code = buffer
+    buffer = ''
+    if(code) processarCodigo(code)
+    return
+  }
+
+  // Aceita apenas dígitos e letras comuns (alguns leitores podem enviar letras)
+  const char = e.key
+  if(char.length === 1 && /[0-9A-Za-z]/.test(char)){
+    buffer += char
+  }
+}
+
+onMounted(()=>{
+  window.addEventListener('keydown', onKeydownGlobal)
+})
+onBeforeUnmount(()=>{
+  window.removeEventListener('keydown', onKeydownGlobal)
+})
 
 const getProductId = (item) => {
   if (!item) return ''
@@ -56,6 +203,7 @@ function onAddToCart(product) {
 
   if (productIndex >= 0) {
     store.productsCar[productIndex].quantity += 1
+    playBeep('success')
     return
   }
 
@@ -64,6 +212,7 @@ function onAddToCart(product) {
     cartId,
     quantity: 1
   })
+  playBeep('success')
 }
 
 
@@ -85,6 +234,30 @@ function onAddToCart(product) {
   padding: 36px 40px 64px;
   box-sizing: border-box;
 
+}
+
+.scanner-toolbar{
+  width: 100%;
+  max-width: 1360px;
+  margin: -18px auto 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 0;
+}
+
+.scanner-last{
+  color: #334155;
+}
+
+.scanner-search{
+  flex: 1;
+  max-width: 520px;
+  margin: 0 16px;
+}
+
+.scanner-search-input{
+  width: 100%;
 }
 
 .page-title{

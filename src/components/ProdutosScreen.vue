@@ -5,42 +5,42 @@
 
 <h1 class="page-title">Produtos</h1>
 
-<!-- Scanner toolbar -->
-<div class="scanner-toolbar">
-  <div class="scanner-left">
-    <v-switch
-      color="blue-accent-2"
-      hide-details
-      inset
-      v-model="habilitarLeitor"
-      :label="`Leitor de código de barras: ${habilitarLeitor ? 'Ativo' : 'Inativo'}`"
-    />
-  </div>
-  <div class="scanner-search">
-    <v-text-field
-      v-model="filtroNome"
-      variant="outlined"
-      density="comfortable"
-      hide-details
-      clearable
-      label="Buscar por nome"
-      prepend-inner-icon="mdi-magnify"
-      class="scanner-search-input"
-    />
-  </div>
-  <div class="scanner-right" v-if="ultimoCodigo">
-    <span class="scanner-last">Último código: <strong>{{ ultimoCodigo }}</strong></span>
-  </div>
-  <div class="scanner-right" v-else>
-    <span class="scanner-last">Aproxime o leitor e bip o produto</span>
-  </div>
-  <v-snackbar v-model="snackbar" timeout="2200" :color="snackbarColor" location="top right">
-    {{ snackbarText }}
-  </v-snackbar>
-  
-</div>
-
 <div class="content">
+  <div class="left-panel">
+    <!-- Scanner toolbar -->
+    <div class="scanner-toolbar">
+      <div class="scanner-left">
+        <v-switch
+          color="blue-accent-2"
+          hide-details
+          inset
+          v-model="habilitarLeitor"
+          :label="`Leitor de código de barras: ${habilitarLeitor ? 'Ativo' : 'Inativo'}`"
+        />
+      </div>
+      <div class="scanner-search">
+        <v-text-field
+          v-model="filtroNome"
+          variant="outlined"
+          density="comfortable"
+          hide-details
+          clearable
+          label="Buscar por nome"
+          prepend-inner-icon="mdi-magnify"
+          class="scanner-search-input"
+        />
+      </div>
+      <div class="scanner-right" v-if="ultimoCodigo">
+        <span class="scanner-last">Último código: <strong>{{ ultimoCodigo }}</strong></span>
+      </div>
+      <div class="scanner-right" v-else>
+        <span class="scanner-last">Aproxime o leitor e bip o produto</span>
+      </div>
+      <v-snackbar v-model="snackbar" timeout="2200" :color="snackbarColor" location="top right">
+        {{ snackbarText }}
+      </v-snackbar>
+    </div>
+
   <section class="products-grid">
     <ProductCard
       v-for="product in filteredProducts"
@@ -58,6 +58,8 @@
       <CarrinhoCompras />
     </div>
   </aside>
+  </div>
+
 </div>
 
 </div>
@@ -236,14 +238,18 @@ function onAddToCart(product) {
 
 }
 
+.left-panel{
+  display: flex;
+  flex-direction: column;
+}
+
 .scanner-toolbar{
   width: 100%;
-  max-width: 1360px;
-  margin: -18px auto 22px;
-  display: flex;
+  margin: 0 0 16px 0;
+  display: grid;
+  grid-template-columns: auto minmax(200px, 420px) 1fr;
+  gap: 16px;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px 8px 0;
 }
 
 .scanner-last{
@@ -276,7 +282,7 @@ function onAddToCart(product) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
   gap: 28px;
-  align-items: flex-start;
+  align-items: start;
 }
 
 .products-grid{
@@ -303,7 +309,7 @@ function onAddToCart(product) {
 
 .cart-panel--fixed{
   position: fixed;
-  top: calc(var(--app-header-height, 96px) + 24px);
+  top: calc(var(--app-header-height, 96px) + 96px);
   right: max(60px, calc((100vw - 1660px) / 2 + 20px));
   width: clamp(320px, 26vw, 560px);
   max-width: calc(100vw - 64px);
@@ -343,8 +349,9 @@ function onAddToCart(product) {
   }
 
   .cart-panel--fixed{
+    top: calc(var(--app-header-height, 96px) + 96px);
     right: max(28px, calc((100vw - 1280px) / 2 + 16px));
-    width: clamp(280px, 28vw, 320px);
+    width: clamp(280px, 28vw, 360px);
   }
 }
 

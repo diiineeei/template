@@ -32,7 +32,7 @@ import AppBar from '@/layouts/default/AppBar.vue'
   top: 0;
   left: 0;
   right: 0;
-  z-index: 40;
+  z-index: 1000;
   background: transparent;
   height: var(--app-header-height, 96px);
 }

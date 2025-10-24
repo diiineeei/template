@@ -90,7 +90,9 @@ const drawer = ref(false)
 
 <style scoped>
 .app-bar {
-  z-index: 30;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   width: 100%;
   backdrop-filter: blur(8px);
   font-size: 1.05rem;

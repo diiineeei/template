@@ -1,7 +1,7 @@
 <template>
-  <v-app style="background-color: #fafafa;">
+  <div style="background-color: #fafafa;">
     <default-view />
-  </v-app>
+  </div>
 </template>
 
 <script setup>

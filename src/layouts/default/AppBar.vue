@@ -8,6 +8,10 @@
     <v-app-bar-title >
       <img src="@/assets/logo-h.png" :width="150"/>
     </v-app-bar-title>
+    <!-- Nome do usuário logado no centro -->
+    <div v-if="userStore?.name" class="app-user d-none d-sm-flex">
+      Olá, {{ userStore.name }}
+    </div>
     <v-tabs class="d-none d-sm-flex">
       <v-tab v-for="page in pages" :key="page.title" :to="page.to">
       {{ page.title}}
@@ -88,5 +92,14 @@ const drawer = ref(false)
   height: 96px !important;
   padding-left: 32px;
   padding-right: 32px;
+}
+
+.app-user{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  color: #fff;
+  font-weight: 600;
 }
 </style>

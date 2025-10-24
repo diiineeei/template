@@ -1,5 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
+import { produtosAppStore } from '@/store/app'
 
 const routes = [
   {
@@ -48,6 +49,19 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+})
+
+// Navigation guard: exige login para todas as rotas exceto Login
+router.beforeEach((to) => {
+  const store = produtosAppStore()
+  const isAuthenticated = !!store.user.token
+  if (!isAuthenticated && to.name !== 'Login') {
+    return { name: 'Login', query: { redirect: to.fullPath } }
+  }
+  if (isAuthenticated && to.name === 'Login') {
+    return { name: 'Produtos2' }
+  }
+  return true
 })
 
 export default router

@@ -21,16 +21,25 @@
           </p>
         </v-container>
         <v-form @submit.prevent="doLogin" ref="form">
+          <v-alert
+            v-if="errorMsg"
+            type="error"
+            variant="tonal"
+            density="comfortable"
+            class="mb-4"
+          >{{ errorMsg }}</v-alert>
+
           <v-text-field
-            label="User name"
+            label="Email"
             variant="outlined"
-            v-model="user.name"
-            :rules="validateName"
+            type="email"
+            v-model="user.email"
+            :rules="validateEmail"
           ></v-text-field>
           <v-text-field
             :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
-            label="Password"
+            label="Senha"
             variant="outlined"
             @click:append-inner="visible = !visible"
             v-model="user.password"
@@ -52,7 +61,7 @@
               Forgot login password?</a
             >
           </div>
-          <v-btn color="black"  block type="submit" >LOGIN</v-btn>
+          <v-btn color="black"  block type="submit" :loading="loading" :disabled="loading">LOGIN</v-btn>
         </v-form>
       </v-container>
     </v-col>
@@ -63,40 +72,84 @@
 import { ref } from "vue";
 import { produtosAppStore } from "@/store/app";
 import router from '@/router'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
 
+const store = produtosAppStore()
+const userStore = store.user
+const route = useRoute()
 
-
-const userStore = produtosAppStore().user
-
-
-
-const visible = ref(false);
+const visible = ref(false)
+const loading = ref(false)
+const errorMsg = ref('')
 
 const user = ref({
-    name: '',
-    password:''
+  email: '',
+  password: ''
 })
 
 const form = ref(null)
 
-/* const validForm = ref(false) */
-
-const validateName = ref([
-    (name) => !!name || 'O nome de usuário é obrigatório',
-    (name) => name.length >= 5 || 'O nome do produto deve ter pelo menos 5 caracteres'
+const validateEmail = ref([
+  (email) => !!email || 'O email é obrigatório',
+  (email) => /.+@.+\..+/.test(email) || 'Insira um email válido'
 ])
 
 const validatePassword = ref([
-    (password) => !!password || 'O senha é obrigatória'
+  (password) => !!password || 'A senha é obrigatória'
 ])
 
-const doLogin = (()=>{
-    const {name, password} = user.value
-    if(name && password){
-        userStore.name = name
-        router.push({path: '/produtos'})
+async function doLogin(){
+  errorMsg.value = ''
+  const { email, password } = user.value
+  if(!email || !password){
+    errorMsg.value = 'Preencha email e senha.'
+    return
+  }
+  try{
+    loading.value = true
+    const { data } = await axios.post('http://localhost:8080/api/signin', {
+      email,
+      password
+    }, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+
+    // Tenta obter token e nome de diferentes formatos de resposta
+    const token = data?.token || data?.accessToken || data?.jwt || ''
+
+    // Decodifica JWT (base64url) para extrair informações como email/nome
+    function decodeJwtPayload(tk){
+      try{
+        const parts = tk.split('.')
+        if(parts.length < 2) return null
+        const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/')
+        const json = decodeURIComponent(atob(base64).split('').map(c => {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        }).join(''))
+        return JSON.parse(json)
+      }catch(e){ return null }
     }
-})
+
+    const payload = token ? decodeJwtPayload(token) : null
+    const emailFromToken = payload?.email || email
+    const derivedName = (emailFromToken || '').split('@')[0]
+      .replace(/\./g,' ')
+      .replace(/(^|\s)\w/g, s => s.toUpperCase())
+    const name = data?.user?.name || data?.name || derivedName || email
+
+    userStore.name = name
+    userStore.email = email
+    userStore.token = token
+
+    const redirect = route.query?.redirect || '/produtos'
+    router.push(redirect)
+  } catch (err) {
+    errorMsg.value = err?.response?.data?.message || 'Falha no login. Verifique suas credenciais.'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <style scoped>

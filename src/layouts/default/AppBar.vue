@@ -13,8 +13,13 @@
       Olá, {{ userStore.name }}
     </div>
     <v-tabs class="d-none d-sm-flex">
-      <v-tab v-for="page in pages" :key="page.title" :to="page.to">
-      {{ page.title}}
+      <v-tab
+        v-for="page in pages"
+        :key="page.title"
+        :to="page.to || undefined"
+        @click="page.action === 'logout' && onLogout()"
+      >
+        {{ page.title}}
       </v-tab>
     </v-tabs>
 
@@ -28,7 +33,14 @@
         class="light-blue-accent-2"
       >
       <v-list variant="elevated" >
-         <v-list-item v-for="page in pages" :key="page.title" :to="page.to" class="light-blue-accent-2" elevation="0">
+         <v-list-item
+           v-for="page in pages"
+           :key="page.title"
+           :to="page.to || undefined"
+           @click="page.action === 'logout' && onLogout()"
+           class="light-blue-accent-2"
+           elevation="0"
+         >
           <v-list-item-title class="font-weight-bold text-uppercase">
             {{ page.title }}</v-list-item-title>
         </v-list-item>
@@ -40,42 +52,38 @@
 
 <script setup>
 import { produtosAppStore } from "@/store/app";
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 
-const userStore = produtosAppStore().user
+const store = produtosAppStore()
+const userStore = store.user
+const router = useRouter()
 
+const isLoggedIn = computed(() => !!userStore.token)
 
+const pages = computed(() => [
+  {
+    title: 'Products',
+    to: { name: 'Produtos2' },
+  },
+  {
+    title: 'Cadastro',
+    to: { name: 'Cadastro' },
+  },
+  {
+    title: 'Carrinho',
+    to: { name: 'Carrinho' },
+  },
+  isLoggedIn.value
+    ? { title: 'Logout', action: 'logout' }
+    : { title: 'Login', to: { name: 'Login' } },
+])
 
-import {ref} from 'vue'
-const pages = [
-  // {
-  //   title: "home",
-  //   path:"/",
-  // },
-{
-  title:"Products",
-  to:{ name: 'Produtos2' },
-},
-// userStore.name.toLowerCase() == 'admin' ?
-{
-  title:"Cadastro",
-  to:{ name: 'Cadastro' },
-},
-{
-  title:"Carrinho",
-  to:{ name: 'Carrinho' },
-},
-// !userStore.name ?
-{
-  title:"Login",
-  to:{ name: 'Login' },
+function onLogout(){
+  store.clearSession?.()
+  router.push({ name: 'Login' })
 }
-// :
-// {
-//   title:userStore.name,
-//   path:"/login",
-// },
 
-]
 const drawer = ref(false)
 
 </script>

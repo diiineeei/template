@@ -102,26 +102,30 @@ function notificar(msg, color = 'success'){
   snackbar.value = true
 }
 
-// Beep sound when adding products
 let audioCtx
-function playBeep(type = 'success'){
-  try{
+
+function playBeep(type = 'success') {
+  try {
     audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)()
     const o = audioCtx.createOscillator()
     const g = audioCtx.createGain()
     const now = audioCtx.currentTime
-    const duration = 0.12
-    const freq = type === 'error' ? 240 : 880
-    o.type = 'sine'
+    const duration = 0.2 // um pouco mais longo
+    const freq = type === 'error' ? 300 : 1000 // mais contraste e frequências mais audíveis
+
+    o.type = 'square' // 'square' soa mais forte que 'sine'
     o.frequency.setValueAtTime(freq, now)
+
+    // aumenta o volume máximo
     g.gain.setValueAtTime(0.0001, now)
-    g.gain.exponentialRampToValueAtTime(0.3, now + 0.01)
+    g.gain.exponentialRampToValueAtTime(0.6, now + 0.01)
     g.gain.exponentialRampToValueAtTime(0.0001, now + duration)
+
     o.connect(g)
     g.connect(audioCtx.destination)
     o.start(now)
     o.stop(now + duration)
-  }catch(e){
+  } catch (e) {
     // falha silenciosa se o contexto de áudio não estiver disponível
   }
 }
@@ -129,7 +133,7 @@ function playBeep(type = 'success'){
 function getBarcodeFromProduct(p){
   if(!p || typeof p !== 'object') return ''
   // Prioridade de chaves comuns
-  const candidates = ['codigoDeBarras','codigo_de_barras','barcode','ean','ean13','upc','code','cod','sku']
+  const candidates = ['codigoDeBarras']
   for(const key of candidates){
     if(p[key] != null && p[key] !== '') return String(p[key])
   }
